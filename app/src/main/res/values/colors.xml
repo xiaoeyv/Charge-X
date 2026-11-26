@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 底层表面 -->
+    <color name="bg">#F5F6F8</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_sunken">#EEF1F5</color>
+
+    <!-- 描边 -->
+    <color name="stroke">#E4E8EE</color>
+    <color name="stroke_soft">#EDF0F4</color>
+
+    <!-- 文字（对比度见设计说明） -->
+    <color name="text_primary">#121820</color>
+    <color name="text_secondary">#5A6673</color>
+    <color name="text_tertiary">#8B95A1</color>
+
+    <!-- 语义色 -->
+    <color name="energy">#0E9F6E</color>
+    <color name="energy_text">#07734F</color>
+    <color name="info">#2F6FED</color>
+    <color name="warn">#A56410</color>
+    <color name="danger">#D93B3B</color>
+
+    <!-- 容量损失段：浅色底，仅作"被扣除"的视觉提示，不抢健康度的主体色 -->
+    <color name="loss">#D93B3B</color>
+    <color name="loss_soft">#F6D2D2</color>
+
+    <!-- 组件专用 -->
+    <color name="ring_track">#E9EDF2</color>
+    <color name="chart_volt">#2F6FED</color>
+    <color name="chart_amp">#0891B2</color>
+    <color name="chart_temp">#D98514</color>
+</resources>

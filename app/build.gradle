@@ -1,0 +1,53 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.xiaoeyv.chargex'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.xiaoeyv.chargex"
+        minSdk 24
+        targetSdk 34
+        // 语义化版本：major * 10000 + minor * 100 + patch
+        versionCode 10000
+        versionName "1.0.0"
+        resourceConfigurations += ['zh', 'en']
+    }
+
+    buildTypes {
+        debug {
+            // 自用包也走压缩，保证安装包体积最小
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // 无正式证书，用 debug key 签名以便直接安装
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/*.version', 'META-INF/*.kotlin_module', 'DebugProbesKt.bin']
+        }
+    }
+
+    lint {
+        abortOnError false
+    }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+}

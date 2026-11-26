@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Charge-X</string>
+    <string name="channel_name">采样服务</string>
+    <string name="channel_desc">持续记录电压、电流、温度与功率</string>
+    <string name="notif_waiting">正在读取电池数据…</string>
+</resources>

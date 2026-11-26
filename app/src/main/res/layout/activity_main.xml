@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:fillViewport="true"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingTop="14dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="20dp">
+
+        <!-- 顶部：标题 + 记录状态 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-medium"
+                android:text="充电"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="●"
+                android:textColor="@color/energy"
+                android:textSize="9sp" />
+
+            <TextView
+                android:id="@+id/tv_record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="记录中"
+                android:textColor="@color/text_tertiary"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- L1：状态主卡 -->
+        <LinearLayout
+            style="@style/Card"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.xiaoeyv.chargex.PowerRingView
+                android:id="@+id/ring"
+                android:layout_width="128dp"
+                android:layout_height="128dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="正在读取"
+                    android:textColor="@color/energy_text"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_eta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text=""
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/stroke" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_power"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="--"
+                        android:textColor="@color/text_primary"
+                        android:textSize="28sp" />
+
+                    <TextView
+                        style="@style/Unit"
+                        android:text="W" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/Label"
+                    android:text="充电功率" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- L2：三宫格 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                style="@style/Card"
+                android:layout_width="0dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    style="@style/Label"
+                    android:text="温度" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_temp"
+                        style="@style/Value"
+                        android:text="--" />
+
+                    <TextView
+                        style="@style/Unit"
+                        android:text="°C" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_temp_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/energy_text"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/Card"
+                android:layout_width="0dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    style="@style/Label"
+                    android:text="电压" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_volt"
+                        style="@style/Value"
+                        android:text="--" />
+
+                    <TextView
+                        style="@style/Unit"
+                        android:text="V" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_volt_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/energy_text"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/Card"
+                android:layout_width="0dp"
+                android:layout_marginStart="4dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    style="@style/Label"
+                    android:text="电流" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_amp"
+                        style="@style/Value"
+                        android:text="--" />
+
+                    <TextView
+                        style="@style/Unit"
+                        android:text="A" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_amp_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/energy_text"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- L2：曲线卡 -->
+        <LinearLayout
+            style="@style/Card"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:padding="14dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_chart_title"
+                    style="@style/CardTitle"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="充电速度" />
+
+                <TextView
+                    android:id="@+id/tv_chart_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="近 5 分钟"
+                    android:textColor="@color/text_tertiary"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="按住图表可查看任意时刻的读数"
+                android:textColor="@color/text_tertiary"
+                android:textSize="11sp" />
+
+            <com.xiaoeyv.chargex.ChartView
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="124dp"
+                android:layout_marginTop="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/chip_power"
+                    style="@style/Chip"
+                    android:text="功率" />
+
+                <TextView
+                    android:id="@+id/chip_volt"
+                    style="@style/Chip"
+                    android:text="电压" />
+
+                <TextView
+                    android:id="@+id/chip_amp"
+                    style="@style/Chip"
+                    android:text="电流" />
+
+                <TextView
+                    android:id="@+id/chip_temp"
+                    style="@style/Chip"
+                    android:text="温度" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- L2：电池健康 -->
+        <LinearLayout
+            style="@style/Card"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/CardTitle"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="电池健康" />
+
+                <TextView
+                    android:id="@+id/tv_h_grade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="3dp"
+                    android:paddingRight="8dp"
+                    android:paddingBottom="3dp"
+                    android:text="待测"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- 健康度大数字 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="bottom"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_h_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="--"
+                    android:textColor="@color/text_primary"
+                    android:textSize="32sp" />
+
+                <TextView
+                    android:id="@+id/tv_h_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="%"
+                    android:textColor="@color/text_tertiary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_h_desc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="正在读取电池信息"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- 容量分段条：总容量 = 可用 + 老化损失 -->
+            <com.xiaoeyv.chargex.MeterView
+                android:id="@+id/meter_capacity"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_h_used"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/tv_h_lost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/text_tertiary"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/stroke" />
+
+            <!-- 测量进度 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="测量进度"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_h_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="等待充电"
+                    android:textColor="@color/text_tertiary"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <com.xiaoeyv.chargex.MeterView
+                android:id="@+id/meter_progress"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:layout_marginTop="7dp" />
+
+            <TextView
+                android:id="@+id/tv_h_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:lineSpacingExtra="3dp"
+                android:text="把手机插上充电器并保持本页面开着，充入约 10% 就会自动算出容量，不用按任何按钮。"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:lineSpacingExtra="3dp"
+                android:text="说明：实测容量通常比标称值低 3%~8%。测量只统计真正流入电池的电荷，充电过程中一部分转化为热，所以这个健康度是偏保守的下限值，不是电池虚标。"
+                android:textColor="@color/text_tertiary"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- 电池信息：把内核与系统能给的字段逐条列出 -->
+        <LinearLayout
+            style="@style/Card"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/CardTitle"
+                android:text="电池信息" />
+
+            <LinearLayout
+                style="@style/InfoRow"
+                android:layout_marginTop="8dp">
+
+                <TextView style="@style/InfoKey" android:text="电池类型" />
+                <TextView android:id="@+id/tv_i_tech" style="@style/InfoVal" android:text="--" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/InfoRow">
+                <TextView style="@style/InfoKey" android:text="供电来源" />
+                <TextView android:id="@+id/tv_i_power" style="@style/InfoVal" android:text="--" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/InfoRow">
+                <TextView style="@style/InfoKey" android:text="系统状态" />
+                <TextView android:id="@+id/tv_i_status" style="@style/InfoVal" android:text="--" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/InfoRow">
+                <TextView style="@style/InfoKey" android:text="循环次数" />
+                <TextView android:id="@+id/tv_i_cycles" style="@style/InfoVal" android:text="--" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/InfoRow">
+                <TextView style="@style/InfoKey" android:text="标称容量" />
+                <TextView android:id="@+id/tv_i_design" style="@style/InfoVal" android:text="--" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/InfoRow">
+                <TextView style="@style/InfoKey" android:text="满充容量" />
+                <TextView android:id="@+id/tv_i_full" style="@style/InfoVal" android:text="--" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/InfoRow">
+                <TextView style="@style/InfoKey" android:text="实测容量" />
+                <TextView android:id="@+id/tv_i_measured" style="@style/InfoVal" android:text="--" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/InfoRow">
+                <TextView style="@style/InfoKey" android:text="充电器上限" />
+                <TextView android:id="@+id/tv_i_charger" style="@style/InfoVal" android:text="--" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/InfoRow">
+                <TextView style="@style/InfoKey" android:text="采样" />
+                <TextView android:id="@+id/tv_i_samples" style="@style/InfoVal" android:text="--" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/row_source"
+                style="@style/InfoRow"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView style="@style/InfoKey" android:text="数据源" />
+                <TextView android:id="@+id/tv_i_source" style="@style/InfoVal" android:text="--" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_i_path"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text=""
+                android:textColor="@color/text_tertiary"
+                android:textSize="10sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- 操作 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btn_toggle"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_primary"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="停止记录"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/btn_export"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_ghost"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="导出记录"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btn_clear"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="2dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="清空数据"
+            android:textColor="@color/text_tertiary"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+</ScrollView>
