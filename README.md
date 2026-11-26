@@ -7,6 +7,7 @@
 ![APK](https://img.shields.io/badge/APK-44%20KB-informational)
 ![Dependencies](https://img.shields.io/badge/dependencies-0-orange)
 ![License](https://img.shields.io/badge/license-MIT-green)
+![CI](https://github.com/xiaoeyv/Charge-X/actions/workflows/android.yml/badge.svg)
 
 纯 Java + 原生 View，**零第三方依赖**，R8 全量压缩后 APK 约 44 KB。
 支持 Android 7.0 (API 24) 及以上设备，围绕「读数要准、界面要看得懂、数据要能带走」打造。
@@ -30,6 +31,7 @@
 | 快速导航 | 说明 |
 | --- | --- |
 | [快速体验](#快速体验--getting-started) | 下载 APK 或从源码编译 |
+| [界面](#界面--screenshots) | 真机截图：默认首屏与图表取值游标 |
 | [核心特性](#核心特性--key-features) | 实时读数、图表游标、电池健康、CSV 导出 |
 | [数据来源](#数据来源--data-sources) | 官方 API、sysfs、PowerProfile 各自能拿到什么 |
 | [健康度算法](#健康度是怎么算的--health-algorithm) | 四级口径、库仑积分原理、为什么实测偏低 |
@@ -66,6 +68,18 @@ Charge-X 是用**纯 Java + 原生 View** 写的电池状态监视器，定位�
 一条贯穿全项目的原则：**拿不到的数据就显示「未提供」，绝不编一个看起来精确的数字。**
 健康度拿不到分母时，单位会从 `%` 变成「分」；实测值明显不可信时，会直接显示「待测」，
 而不是给出一个会让人以为电池报废的百分比。
+
+## 界面 / Screenshots
+
+| 默认首屏 | 按住图表取值 |
+| --- | --- |
+| <img src="docs/screenshot-main.png" width="300" alt="默认首屏：电量环、功率、三宫格、曲线" /> | <img src="docs/screenshot-cursor.png" width="300" alt="按住图表出现垂直游标与数值浮层" /> |
+
+> 💡 **截图说明**
+>
+> 截图取自 Android 9 模拟器。模拟器没有电流传感器，所以电流显示为「无数据」、功率为空，
+> 电压曲线是一条恒定的 5 V —— 这些是运行环境造成的，真机上这一栏会有真实读数。
+> 界面本身是从真机渲染结果直接截取的，不是设计稿。
 
 ## 核心特性 / Key Features
 
@@ -227,6 +241,20 @@ gradle assembleRelease
 >
 > 自定义 View（`PowerRingView` / `ChartView` / `MeterView`）由 XML 反射实例化，
 > `proguard-rules.pro` 里必须 keep 类名，否则 release 包会启动即崩，而 debug 包不一定暴露这个问题。
+
+### CI / GitHub Actions
+
+`.github/workflows/android.yml` 会在推送到 `main` 或提 PR 时自动跑 71 个单元测试并构建 release APK，
+产物作为 artifact 挂在 Actions 页面。
+
+打 tag 时额外自动发布：
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+Release 页面会附上 `Charge-X-v1.0.0.apk` 和自动生成的变更说明。
 
 ## CSV 格式 / CSV Export
 

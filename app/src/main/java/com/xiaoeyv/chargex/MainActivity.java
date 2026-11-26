@@ -414,7 +414,8 @@ public class MainActivity extends Activity {
             if (sb.length() > 0) sb.append(" / ");
             sb.append(d.chargerMaxMa).append(" mA");
         }
-        if (sb.length() == 0 && !PowerMath.isInvalid(d.maxChargingUa)) {
+        // 声明值可能报 0，不能当成有效上限，否则界面上会出现「最大 0.0 A」
+        if (sb.length() == 0 && !PowerMath.isInvalid(d.maxChargingUa) && d.maxChargingUa > 0) {
             sb.append("最大 ").append(PowerMath.fmt(d.maxChargingUa / 1_000_000.0, 1)).append(" A");
         }
         return sb.length() == 0 ? "未提供" : sb.toString();

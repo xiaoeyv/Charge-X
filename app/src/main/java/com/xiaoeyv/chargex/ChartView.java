@@ -69,6 +69,8 @@ public class ChartView extends View {
     private final String[] xLabels = {"", "", "", ""};
     private long xStamp;
     private final SimpleDateFormat xFmt = new SimpleDateFormat("HH:mm", Locale.US);
+    /** 跨度不到几分钟时用秒级格式，否则 4 个标签会全挤成同一个 "13:35" */
+    private final SimpleDateFormat xFmtSec = new SimpleDateFormat("HH:mm:ss", Locale.US);
     private final SimpleDateFormat cursorFmt = new SimpleDateFormat("HH:mm:ss", Locale.US);
 
     // 纵轴刻度缓存：只在量程变化时重新生成字符串
@@ -505,9 +507,11 @@ public class ChartView extends View {
         if (n < 2) return;
         long t0 = ts[0];
         long t3 = ts[n - 1];
+        // 跨度不足 3 分钟时，分钟级标签会重复，改用秒级
+        SimpleDateFormat fmt = (t3 - t0) <= 3 * 60_000L ? xFmtSec : xFmt;
         for (int i = 0; i < 4; i++) {
             long t = t0 + (t3 - t0) * i / 3;
-            xLabels[i] = i == 3 ? "现在" : xFmt.format(new Date(t));
+            xLabels[i] = i == 3 ? "现在" : fmt.format(new Date(t));
         }
     }
 }
